@@ -1,24 +1,9 @@
 import Product from "../../../domain/product/entity/product";
-import ProductRepository from "../../../infrastructure/product/repository/sequelize/product.repository";
-import { OutputListProductsDto } from "./list.products.dto";
+import { ListProductUseCase } from "./list.products.usecase";
 
-class ListProductUseCase {
-    constructor(private readonly productRepository: ProductRepository){}
 
-    async execute(): Promise<OutputListProductsDto> {
-        const productsOrError =  await this.productRepository.findAll()
-        const productsAdapted =  productsOrError.map(product=>({
-            name: product.name,
-            id: product.id,
-            price: product.price
-        }))
-        return {
-            products: productsAdapted
-        }
-    }
-}
 
-describe('Tests to list products', ()=>{
+describe('Unit tests to list products', ()=>{
     
     const product1 = new Product('1', 'Pão', 12)
     const product2 = new Product('2', 'Presunto', 125)
