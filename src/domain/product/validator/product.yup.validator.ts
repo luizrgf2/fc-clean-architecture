@@ -12,7 +12,7 @@ export default class ProductYupValidator
         .shape({
           id: yup.string().required("Id is required"),
           name: yup.string().required("Name is required"),
-          price: yup.number().required('Price is required')
+          price: yup.number().moreThan(0,'Price must be greater than zero').required('Price is required')
         })
         .validateSync(
           {
